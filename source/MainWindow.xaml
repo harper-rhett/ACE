@@ -12,15 +12,28 @@
 
     <!-- Window Resources -->
     <Window.Resources>
+        <!-- Brushes -->
+        <SolidColorBrush x:Key="Text" Color="#f0f1f1" />
+
         <!-- Menu Item Style -->
         <Style TargetType="MenuItem">
             <Setter Property="Height" Value="32"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#f0f1f1"/>
 
             <!-- Submenu Item Style -->
             <Style.Resources>
                 <Style TargetType="MenuItem">
-                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Foreground" Value="{StaticResource Text}"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        
+        <!-- Video Style -->
+        <Style x:Key="Video" TargetType="DockPanel">
+            <Setter Property="Margin" Value="0,0,0,6"/>
+            <Style.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Foreground" Value="{StaticResource Text}"/>
                 </Style>
             </Style.Resources>
         </Style>
@@ -53,10 +66,23 @@
             <!-- Video Browser -->
             <ScrollViewer x:Name="VideoBrowser" Background="#FF353E43" Width="200" DockPanel.Dock="Left" Margin="6,6,6,6" Padding="6,6,6,6">
                 <StackPanel x:Name="VideoContainer" Margin="0,0,0,-6">
-                    <Grid Background="#FF47535A" Height="100" Margin="0,0,0,6"/>
-                    <Grid Background="#FF47535A" Height="100" Margin="0,0,0,6"/>
-                    <Grid Background="#FF47535A" Height="100" Margin="0,0,0,6"/>
-                    <Grid Background="#FF47535A" Height="100" Margin="0,0,0,6"/>
+                    <DockPanel Style="{StaticResource Video}">
+                        <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
+                        <Label Content="Video #1"/>
+                    </DockPanel>
+                    <DockPanel Style="{StaticResource Video}">
+                        <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
+                        <Label Content="Video #2"/>
+                    </DockPanel>
+                    <DockPanel Style="{StaticResource Video}">
+                        <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
+                        <Label Content="Video #3"/>
+                    </DockPanel>
+                    <DockPanel Style="{StaticResource Video}">
+                        <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
+                        <Label Content="Video #4"/>
+                    </DockPanel>
+
                 </StackPanel>
             </ScrollViewer>
 
