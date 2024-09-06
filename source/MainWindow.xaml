@@ -9,7 +9,7 @@
 		xmlns:local="clr-namespace:ACE"
 		mc:Ignorable="d"
 		Title="AI for Civil Engineering" Height="450" Width="800" Background="#FF47535A">
-    
+
     <!-- Window Resources -->
     <Window.Resources>
         <!-- Menu Item Style -->
@@ -25,9 +25,9 @@
             </Style.Resources>
         </Style>
     </Window.Resources>
-    
+
     <!-- Window Content -->
-    <DockPanel>
+    <DockPanel x:Name="Window_Content">
         <!-- Toolbar -->
         <Menu x:Name="Toolbar" Height="32" DockPanel.Dock="Top" Background="{x:Null}">
             <!-- File Dropdown -->
@@ -36,25 +36,36 @@
                 <MenuItem x:Name="Select_Model_Data" Header="Select Model Data"></MenuItem>
                 <MenuItem x:Name="Select_Debris_Videos" Header="Select Debris Videos"></MenuItem>
             </MenuItem>
-            
+
             <!-- Setting Dropdown -->
             <MenuItem x:Name="Settings" Header="Settings">
                 <MenuItem x:Name="Setting_1" Header="Setting 1" IsCheckable="True"></MenuItem>
                 <MenuItem x:Name="Setting_2" Header="Setting 2" IsCheckable="True"></MenuItem>
             </MenuItem>
-            
+
             <!-- Run Commands -->
             <MenuItem x:Name="Run_Training" Header="Run Training" Click="Run_Training_Click"/>
             <MenuItem x:Name="Run_Model" Header="Run Model" Click="Run_Model_Click"/>
         </Menu>
-        
-        <!-- Video Viewer and Properties -->
-        <DockPanel>
-            <ScrollViewer Background="#FF353E43" Width="200" DockPanel.Dock="Left" Margin="6,6,6,6"/>
-            <DockPanel>
+
+        <!-- Application Content -->
+        <DockPanel x:Name="Application_Content">
+            <!-- Video Browser -->
+            <ScrollViewer x:Name="Video_Browser" Background="#FF353E43" Width="200" DockPanel.Dock="Left" Margin="6,6,6,6">
+                <StackPanel x:Name="Video_Container">
+                    <Grid Background="#FF47535A" Height="100" Margin="6,6,6,0"/>
+                    <Grid Background="#FF47535A" Height="100" Margin="6,6,6,0"/>
+                    <Grid Background="#FF47535A" Height="100" Margin="6,6,6,0"/>
+                    <Grid Background="#FF47535A" Height="100" Margin="6,6,6,0"/>
+                    <Grid Background="#FF47535A" Height="100"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Video Viewer and Properties -->
+            <DockPanel x:Name="Preview_Content">
                 <!-- Video Viewer -->
                 <Grid Background="#FF353E43" DockPanel.Dock="Bottom" Height="100" Margin="6,0,6,6"/>
-                
+
                 <!-- Video Properties -->
                 <Grid Background="#FF353E43" Margin="6,6,6,6"/>
             </DockPanel>
