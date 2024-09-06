@@ -22,19 +22,14 @@ namespace ACE
 			InitializeComponent();
 		}
 
-		private void Run_Click(object sender, RoutedEventArgs e)
-		{
-			Debug.WriteLine("Run clicked");
-		}
-
-		private void Run_Training_Click(object sender, RoutedEventArgs e)
+		private void TrainModelClick(object sender, RoutedEventArgs e)
 		{
 
 		}
 
-		private void Run_Model_Click(object sender, RoutedEventArgs e)
+		private void RunModelClick(object sender, RoutedEventArgs e)
 		{
 
 		}
-	}
+    }
 }

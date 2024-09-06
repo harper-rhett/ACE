@@ -27,42 +27,41 @@
     </Window.Resources>
 
     <!-- Window Content -->
-    <DockPanel x:Name="Window_Content">
+    <DockPanel x:Name="WindowContent">
         <!-- Toolbar -->
         <Menu x:Name="Toolbar" Height="32" DockPanel.Dock="Top" Background="{x:Null}">
             <!-- File Dropdown -->
             <MenuItem x:Name="File" Header="File">
-                <MenuItem x:Name="Select_Training_Data" Header="Select Training Data"></MenuItem>
-                <MenuItem x:Name="Select_Model_Data" Header="Select Model Data"></MenuItem>
-                <MenuItem x:Name="Select_Debris_Videos" Header="Select Debris Videos"></MenuItem>
+                <MenuItem x:Name="SelectTrainingData" Header="Select Training Data"></MenuItem>
+                <MenuItem x:Name="SelectModelData" Header="Select Model Data"></MenuItem>
+                <MenuItem x:Name="SelectDebrisVideos" Header="Select Debris Videos"></MenuItem>
             </MenuItem>
 
             <!-- Setting Dropdown -->
             <MenuItem x:Name="Settings" Header="Settings">
-                <MenuItem x:Name="Setting_1" Header="Setting 1" IsCheckable="True"></MenuItem>
-                <MenuItem x:Name="Setting_2" Header="Setting 2" IsCheckable="True"></MenuItem>
+                <MenuItem x:Name="Setting1" Header="Setting 1" IsCheckable="True"></MenuItem>
+                <MenuItem x:Name="Setting2" Header="Setting 2" IsCheckable="True"></MenuItem>
             </MenuItem>
 
             <!-- Run Commands -->
-            <MenuItem x:Name="Run_Training" Header="Run Training" Click="Run_Training_Click"/>
-            <MenuItem x:Name="Run_Model" Header="Run Model" Click="Run_Model_Click"/>
+            <MenuItem x:Name="TrainModel" Header="Train Model" Click="TrainModelClick"/>
+            <MenuItem x:Name="RunModel" Header="Run Model" Click="RunModelClick"/>
         </Menu>
 
         <!-- Application Content -->
-        <DockPanel x:Name="Application_Content">
+        <DockPanel x:Name="ApplicationContent">
             <!-- Video Browser -->
-            <ScrollViewer x:Name="Video_Browser" Background="#FF353E43" Width="200" DockPanel.Dock="Left" Margin="6,6,6,6">
-                <StackPanel x:Name="Video_Container">
-                    <Grid Background="#FF47535A" Height="100" Margin="6,6,6,0"/>
-                    <Grid Background="#FF47535A" Height="100" Margin="6,6,6,0"/>
-                    <Grid Background="#FF47535A" Height="100" Margin="6,6,6,0"/>
-                    <Grid Background="#FF47535A" Height="100" Margin="6,6,6,0"/>
-                    <Grid Background="#FF47535A" Height="100"/>
+            <ScrollViewer x:Name="VideoBrowser" Background="#FF353E43" Width="200" DockPanel.Dock="Left" Margin="6,6,6,6" Padding="6,6,6,6">
+                <StackPanel x:Name="VideoContainer" Margin="0,0,0,-6">
+                    <Grid Background="#FF47535A" Height="100" Margin="0,0,0,6"/>
+                    <Grid Background="#FF47535A" Height="100" Margin="0,0,0,6"/>
+                    <Grid Background="#FF47535A" Height="100" Margin="0,0,0,6"/>
+                    <Grid Background="#FF47535A" Height="100" Margin="0,0,0,6"/>
                 </StackPanel>
             </ScrollViewer>
 
             <!-- Video Viewer and Properties -->
-            <DockPanel x:Name="Preview_Content">
+            <DockPanel x:Name="PreviewContent">
                 <!-- Video Viewer -->
                 <Grid Background="#FF353E43" DockPanel.Dock="Bottom" Height="100" Margin="6,0,6,6"/>
 
