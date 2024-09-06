@@ -13,17 +13,20 @@
     <!-- Window Resources -->
     <Window.Resources>
         <!-- Brushes -->
-        <SolidColorBrush x:Key="Text" Color="#f0f1f1" />
+        <SolidColorBrush x:Key="PrimaryColor" Color="#FF47535A"/>
+        <SolidColorBrush x:Key="SecondaryColor" Color="#FF353E43"/>
+        <SolidColorBrush x:Key="ToolText" Color="White"/>
+        <SolidColorBrush x:Key="LabelText" Color="#C4CCD0" />
 
         <!-- Menu Item Style -->
         <Style TargetType="MenuItem">
             <Setter Property="Height" Value="32"/>
-            <Setter Property="Foreground" Value="#f0f1f1"/>
+            <Setter Property="Foreground" Value="{StaticResource ToolText}"/>
 
             <!-- Submenu Item Style -->
             <Style.Resources>
                 <Style TargetType="MenuItem">
-                    <Setter Property="Foreground" Value="{StaticResource Text}"/>
+                    <Setter Property="Foreground" Value="Black"/>
                 </Style>
             </Style.Resources>
         </Style>
@@ -33,7 +36,7 @@
             <Setter Property="Margin" Value="0,0,0,6"/>
             <Style.Resources>
                 <Style TargetType="Label">
-                    <Setter Property="Foreground" Value="{StaticResource Text}"/>
+                    <Setter Property="Foreground" Value="{StaticResource LabelText}"/>
                 </Style>
             </Style.Resources>
         </Style>
@@ -64,7 +67,7 @@
         <!-- Application Content -->
         <DockPanel x:Name="ApplicationContent">
             <!-- Video Browser -->
-            <ScrollViewer x:Name="VideoBrowser" Background="#FF353E43" Width="200" DockPanel.Dock="Left" Margin="6,6,6,6" Padding="6,6,6,6">
+            <ScrollViewer x:Name="VideoBrowser" Background="{StaticResource SecondaryColor}" Width="200" DockPanel.Dock="Left" Margin="6,6,6,6" Padding="6,6,6,6">
                 <StackPanel x:Name="VideoContainer" Margin="0,0,0,-6">
                     <DockPanel Style="{StaticResource Video}">
                         <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
@@ -89,10 +92,10 @@
             <!-- Video Viewer and Properties -->
             <DockPanel x:Name="PreviewContent">
                 <!-- Video Viewer -->
-                <Grid Background="#FF353E43" DockPanel.Dock="Bottom" Height="100" Margin="6,0,6,6"/>
+                <Grid Background="{StaticResource SecondaryColor}" DockPanel.Dock="Bottom" Height="100" Margin="6,0,6,6"/>
 
                 <!-- Video Properties -->
-                <Grid Background="#FF353E43" Margin="6,6,6,6"/>
+                <Grid Background="{StaticResource SecondaryColor}" Margin="6,6,6,6"/>
             </DockPanel>
         </DockPanel>
     </DockPanel>
