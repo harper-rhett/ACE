@@ -3,13 +3,13 @@
     <!-- Brushes -->
     <SolidColorBrush x:Key="PrimaryColor" Color="#FF47535A"/>
     <SolidColorBrush x:Key="SecondaryColor" Color="#FF353E43"/>
-    <SolidColorBrush x:Key="ToolText" Color="White"/>
-    <SolidColorBrush x:Key="LabelText" Color="#C4CCD0" />
+    <SolidColorBrush x:Key="MenuHeaderColor" Color="White"/>
+    <SolidColorBrush x:Key="TextColor" Color="#C4CCD0" />
 
     <!-- Menu Item Style -->
     <Style TargetType="MenuItem">
         <Setter Property="Height" Value="32"/>
-        <Setter Property="Foreground" Value="{StaticResource ToolText}"/>
+        <Setter Property="Foreground" Value="{StaticResource MenuHeaderColor}"/>
 
         <!-- Submenu Item Style -->
         <Style.Resources>
@@ -24,8 +24,20 @@
         <Setter Property="Margin" Value="0,0,0,6"/>
         <Style.Resources>
             <Style TargetType="Label">
-                <Setter Property="Foreground" Value="{StaticResource LabelText}"/>
+                <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
             </Style>
         </Style.Resources>
+    </Style>
+    
+    <!-- Title Style -->
+    <Style x:Key="Title" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    
+    <!-- Body Style -->
+    <Style x:Key="Body" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
     </Style>
 </ResourceDictionary>

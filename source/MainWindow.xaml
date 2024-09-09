@@ -35,35 +35,51 @@
         <!-- Application Content -->
         <DockPanel x:Name="ApplicationContent">
             <!-- Video Browser -->
-            <ScrollViewer x:Name="VideoBrowser" Background="{StaticResource SecondaryColor}" Width="200" DockPanel.Dock="Left" Margin="6,6,6,6" Padding="6,6,6,6">
-                <StackPanel x:Name="VideoContainer" Margin="0,0,0,-6">
-                    <DockPanel Style="{StaticResource Video}">
-                        <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
-                        <Label Content="Video #1"/>
-                    </DockPanel>
-                    <DockPanel Style="{StaticResource Video}">
-                        <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
-                        <Label Content="Video #2"/>
-                    </DockPanel>
-                    <DockPanel Style="{StaticResource Video}">
-                        <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
-                        <Label Content="Video #3"/>
-                    </DockPanel>
-                    <DockPanel Style="{StaticResource Video}">
-                        <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
-                        <Label Content="Video #4"/>
-                    </DockPanel>
+            <DockPanel x:Name="VideoBrowser" Width="200" DockPanel.Dock="Left" Margin="6,6,6,6">
+                <!-- Video Browser Title -->
+                <Label Content="Video Browser" DockPanel.Dock="Top" Style="{StaticResource Title}"/>
 
-                </StackPanel>
-            </ScrollViewer>
+                <!-- Video Scroll Viewer -->
+                <ScrollViewer x:Name="VideoBrowserScroller" Background="{StaticResource SecondaryColor}" Padding="6,6,6,6">
+                    <StackPanel x:Name="VideoContainer">
+                        <DockPanel Style="{StaticResource Video}">
+                            <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
+                            <Label Content="Video #1"/>
+                        </DockPanel>
+                        <DockPanel Style="{StaticResource Video}">
+                            <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
+                            <Label Content="Video #2"/>
+                        </DockPanel>
+                        <DockPanel Style="{StaticResource Video}">
+                            <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
+                            <Label Content="Video #3"/>
+                        </DockPanel>
+                        <DockPanel Style="{StaticResource Video}">
+                            <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
+                            <Label Content="Video #4"/>
+                        </DockPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
 
             <!-- Video Viewer and Properties -->
             <DockPanel x:Name="PreviewContent">
                 <!-- Video Viewer -->
-                <Grid Background="{StaticResource SecondaryColor}" DockPanel.Dock="Bottom" Height="100" Margin="6,0,6,6"/>
+                <DockPanel DockPanel.Dock="Top" Margin="6,6,6,6" Height="250">
+                    <Label Content="Viewport" DockPanel.Dock="Top" Style="{StaticResource Title}"/>
+                    <Grid Background="{StaticResource SecondaryColor}"/>
+                </DockPanel>
 
                 <!-- Video Properties -->
-                <Grid Background="{StaticResource SecondaryColor}" Margin="6,6,6,6"/>
+                <DockPanel Margin="6,6,6,6">
+                    <Label Content="Properties" DockPanel.Dock="Top" Style="{StaticResource Title}"/>
+                    <Grid Background="{StaticResource SecondaryColor}">
+                        <TextBlock Padding="6,6,6,6" Style="{StaticResource Body}">
+                            This is where we might put some video properties.
+                            File size, video length, and debris information are just a few of the possibilities.
+                        </TextBlock>
+                    </Grid>
+                </DockPanel>
             </DockPanel>
         </DockPanel>
     </DockPanel>
