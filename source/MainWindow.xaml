@@ -10,38 +10,6 @@
 		mc:Ignorable="d"
 		Title="AI for Civil Engineering" Height="450" Width="800" Background="#FF47535A">
 
-    <!-- Window Resources -->
-    <Window.Resources>
-        <!-- Brushes -->
-        <SolidColorBrush x:Key="PrimaryColor" Color="#FF47535A"/>
-        <SolidColorBrush x:Key="SecondaryColor" Color="#FF353E43"/>
-        <SolidColorBrush x:Key="ToolText" Color="White"/>
-        <SolidColorBrush x:Key="LabelText" Color="#C4CCD0" />
-
-        <!-- Menu Item Style -->
-        <Style TargetType="MenuItem">
-            <Setter Property="Height" Value="32"/>
-            <Setter Property="Foreground" Value="{StaticResource ToolText}"/>
-
-            <!-- Submenu Item Style -->
-            <Style.Resources>
-                <Style TargetType="MenuItem">
-                    <Setter Property="Foreground" Value="Black"/>
-                </Style>
-            </Style.Resources>
-        </Style>
-        
-        <!-- Video Style -->
-        <Style x:Key="Video" TargetType="DockPanel">
-            <Setter Property="Margin" Value="0,0,0,6"/>
-            <Style.Resources>
-                <Style TargetType="Label">
-                    <Setter Property="Foreground" Value="{StaticResource LabelText}"/>
-                </Style>
-            </Style.Resources>
-        </Style>
-    </Window.Resources>
-
     <!-- Window Content -->
     <DockPanel x:Name="WindowContent">
         <!-- Toolbar -->

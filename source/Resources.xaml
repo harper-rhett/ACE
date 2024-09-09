@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="PrimaryColor" Color="#FF47535A"/>
+    <SolidColorBrush x:Key="SecondaryColor" Color="#FF353E43"/>
+    <SolidColorBrush x:Key="ToolText" Color="White"/>
+    <SolidColorBrush x:Key="LabelText" Color="#C4CCD0" />
+
+    <!-- Menu Item Style -->
+    <Style TargetType="MenuItem">
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Foreground" Value="{StaticResource ToolText}"/>
+
+        <!-- Submenu Item Style -->
+        <Style.Resources>
+            <Style TargetType="MenuItem">
+                <Setter Property="Foreground" Value="Black"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <!-- Video Style -->
+    <Style x:Key="Video" TargetType="DockPanel">
+        <Setter Property="Margin" Value="0,0,0,6"/>
+        <Style.Resources>
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="{StaticResource LabelText}"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+</ResourceDictionary>
