@@ -30,6 +30,7 @@
             <!-- Run Commands -->
             <MenuItem x:Name="TrainModel" Header="Train Model" Click="TrainModelClick"/>
             <MenuItem x:Name="RunModel" Header="Run Model" Click="RunModelClick"/>
+            
         </Menu>
 
         <!-- Application Content -->

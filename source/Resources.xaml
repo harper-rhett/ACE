@@ -11,7 +11,7 @@
         <Setter Property="Height" Value="32"/>
         <Setter Property="Foreground" Value="{StaticResource MenuHeaderColor}"/>
 
-        <!-- Submenu Item Style -->
+        <!--Submenu Item Style-->
         <Style.Resources>
             <Style TargetType="MenuItem">
                 <Setter Property="Foreground" Value="Black"/>
