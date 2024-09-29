@@ -10,5 +10,4 @@ namespace ACE
 	public partial class App : Application
 	{
 	}
-
 }

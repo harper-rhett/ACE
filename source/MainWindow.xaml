@@ -16,9 +16,9 @@
         <Menu x:Name="Toolbar" Height="32" DockPanel.Dock="Top" Background="{x:Null}">
             <!-- File Dropdown -->
             <MenuItem x:Name="File" Header="File">
-                <MenuItem x:Name="SelectTrainingData" Header="Select Training Data"></MenuItem>
-                <MenuItem x:Name="SelectModelData" Header="Select Model Data"></MenuItem>
-                <MenuItem x:Name="SelectDebrisVideos" Header="Select Debris Videos"></MenuItem>
+                <MenuItem x:Name="SelectTrainingData" Header="Select Training Data" Click="SelectTrainingData_Click"></MenuItem>
+                <MenuItem x:Name="SelectModelData" Header="Select Model Data" Click="SelectModelData_Click"></MenuItem>
+                <MenuItem x:Name="SelectDebrisVideos" Header="Select Debris Videos" Click="SelectDebrisVideos_Click"></MenuItem>
             </MenuItem>
 
             <!-- Setting Dropdown -->
@@ -28,8 +28,8 @@
             </MenuItem>
 
             <!-- Run Commands -->
-            <MenuItem x:Name="TrainModel" Header="Train Model" Click="TrainModelClick"/>
-            <MenuItem x:Name="RunModel" Header="Run Model" Click="RunModelClick"/>
+            <MenuItem x:Name="TrainModel" Header="Train Model" Click="TrainModel_Click"/>
+            <MenuItem x:Name="RunModel" Header="Run Model" Click="RunModel_Click"/>
             
         </Menu>
 
