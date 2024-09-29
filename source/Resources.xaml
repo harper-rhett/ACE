@@ -3,14 +3,18 @@
     <!-- Colors -->
     <Color x:Key="PrimaryColor">#FF47535A</Color>
     <Color x:Key="SecondaryColor">#FF353E43</Color>
-    <Color x:Key="TertiaryColor">#2F373C</Color>
+    <Color x:Key="TertiaryColor">#596870</Color>
+    <Color x:Key="HoverColor">#6B7D87</Color>
+    <Color x:Key="PressedColor">#80919A</Color>
+    <Color x:Key="MenuHeaderColor">White</Color>
+    <Color x:Key="TextColor">#C4CCD0</Color>
     
     <!-- Brushes -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource TertiaryColor}"/>
-    <SolidColorBrush x:Key="MenuHeaderBrush" Color="White"/>
-    <SolidColorBrush x:Key="TextBrush" Color="#C4CCD0" />
+    <SolidColorBrush x:Key="MenuHeaderBrush" Color="{StaticResource MenuHeaderColor}"/>
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
 
     <!-- Menu Item Style -->
     <Style TargetType="MenuItem">
