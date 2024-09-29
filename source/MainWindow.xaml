@@ -42,7 +42,7 @@
 
                 <!-- Video Scroll Viewer -->
                 <ScrollViewer x:Name="VideoBrowserScroller" Background="{StaticResource SecondaryColor}" Padding="6,6,6,6">
-                    <StackPanel x:Name="VideoContainer" Margin="0,0,0,-6">
+                    <StackPanel x:Name="VideosContainer" Margin="0,0,0,-6">
                         <DockPanel Style="{StaticResource Video}">
                             <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
                             <Label Content="Video #1"/>

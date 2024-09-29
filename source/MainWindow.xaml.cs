@@ -8,7 +8,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 // Added namespaces
 using System.Diagnostics;
@@ -21,6 +20,7 @@ namespace ACE
 		public MainWindow()
 		{
 			InitializeComponent();
+			VideosContainer.Children.Clear();
 		}
 
 		private void SelectTrainingData_Click(object sender, RoutedEventArgs e)
@@ -76,9 +76,22 @@ namespace ACE
 
 		private void LoadVideos(string folderName, string folderPath)
 		{
+			// Get videos
 			string[] filePaths = Directory.GetFiles(folderPath, "*.mp4", SearchOption.AllDirectories);
 			Debug.Print($"Loading {filePaths.Length} videos at {folderPath}");
 
+			// Load previews
+			VideosContainer.Children.Clear();
+			foreach (string filePath in filePaths)
+			{
+				// Get file info
+				string fileName = Path.GetFileName(filePath);
+
+				// Add video preview to container
+				VideoContainer videoContainer = new();
+				videoContainer.Label.Content = fileName;
+				VideosContainer.Children.Add(videoContainer);
+			}
 		}
 	}
 }

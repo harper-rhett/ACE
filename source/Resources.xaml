@@ -23,6 +23,9 @@
     <Style x:Key="Video" TargetType="DockPanel">
         <Setter Property="Margin" Value="0,0,0,6"/>
         <Style.Resources>
+            <Style TargetType="Grid">
+                <Setter Property="Background" Value="#FF47535A"/>
+            </Style>
             <Style TargetType="Label">
                 <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
             </Style>
