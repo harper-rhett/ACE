@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="150">
     <DockPanel Style="{StaticResource Video}">
-        <Grid Height="100" DockPanel.Dock="Top"></Grid>
+        <Grid Height="100" DockPanel.Dock="Top"/>
         <Label x:Name="Label" Content="Video X"/>
     </DockPanel>
 </UserControl>
