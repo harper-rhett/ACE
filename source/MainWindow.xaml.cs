@@ -21,11 +21,18 @@ namespace ACE
 
 		public MainWindow()
 		{
+			// Initialize
 			InitializeComponent();
+
+			// Clear videos container of example previews
 			VideosContainer.Children.Clear();
+
+			// Assign click events
+			SelectTrainingDataItem.Click += SelectTrainingData;
+			SelectDebrisVideosItem.Click += SelectDebrisVideos;
 		}
 
-		private void SelectTrainingData_Click(object sender, RoutedEventArgs e)
+		private void SelectTrainingData(object sender, RoutedEventArgs e)
 		{
 			// Initialize folder dialog
 			Microsoft.Win32.OpenFolderDialog folderDialog = new();
@@ -43,12 +50,7 @@ namespace ACE
 			}
 		}
 
-		private void SelectModelData_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
-		private void SelectDebrisVideos_Click(object sender, RoutedEventArgs e)
+		private void SelectDebrisVideos(object sender, RoutedEventArgs e)
 		{
 			// Initialize folder dialog
 			Microsoft.Win32.OpenFolderDialog folderDialog = new();
@@ -64,16 +66,6 @@ namespace ACE
 				string folderPath = folderDialog.FolderName;
 				LoadVideos(folderName, folderPath);
 			}
-		}
-
-		private void TrainModel_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
-		private void RunModel_Click(object sender, RoutedEventArgs e)
-		{
-
 		}
 
 		private void LoadVideos(string folderName, string folderPath)

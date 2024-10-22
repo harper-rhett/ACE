@@ -8,7 +8,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:ACE"
 		mc:Ignorable="d"
-		Title="AI for Civil Engineering" Height="450" Width="800" Background="{StaticResource PrimaryBrush}">
+		Title="AI for Civil Engineering" Height="550" Width="800" Background="{StaticResource PrimaryBrush}">
 
     <!-- Window Content -->
     <DockPanel x:Name="WindowContent">
@@ -16,9 +16,9 @@
         <Menu x:Name="Toolbar" Height="32" DockPanel.Dock="Top" Background="{x:Null}">
             <!-- File Dropdown -->
             <MenuItem x:Name="File" Header="File">
-                <MenuItem x:Name="SelectTrainingData" Header="Select Training Data" Click="SelectTrainingData_Click"></MenuItem>
-                <MenuItem x:Name="SelectModelData" Header="Select Model Data" Click="SelectModelData_Click"></MenuItem>
-                <MenuItem x:Name="SelectDebrisVideos" Header="Select Debris Videos" Click="SelectDebrisVideos_Click"></MenuItem>
+                <MenuItem x:Name="SelectTrainingDataItem" Header="Select Training Data"></MenuItem>
+                <MenuItem x:Name="SelectModelDataItem" Header="Select Model Data"></MenuItem>
+                <MenuItem x:Name="SelectDebrisVideosItem" Header="Select Debris Videos"></MenuItem>
             </MenuItem>
 
             <!-- Setting Dropdown -->
@@ -28,8 +28,8 @@
             </MenuItem>
 
             <!-- Run Commands -->
-            <MenuItem x:Name="TrainModel" Header="Train Model" Click="TrainModel_Click"/>
-            <MenuItem x:Name="RunModel" Header="Run Model" Click="RunModel_Click"/>
+            <MenuItem x:Name="TrainModelItem" Header="Train Model"/>
+            <MenuItem x:Name="RunModelItem" Header="Run Model"/>
             
         </Menu>
 
@@ -53,7 +53,7 @@
             <!-- Video Viewer and Properties -->
             <DockPanel x:Name="PreviewContent">
                 <!-- Video Viewer -->
-                <DockPanel x:Name="Viewport" DockPanel.Dock="Top" Margin="6,6,6,6" Height="250">
+                <DockPanel x:Name="Viewport" DockPanel.Dock="Top" Margin="6,6,6,6" Height="350">
                     <Label x:Name="ViewportTitle" Content="Viewport" DockPanel.Dock="Top" Style="{StaticResource Title}"/>
                     <Border x:Name="ViewportVideo" Background="{StaticResource SecondaryBrush}" Padding="6,6,6,6">
                         <MediaElement x:Name="VideoPlayer"/>
