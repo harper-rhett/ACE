@@ -43,22 +43,12 @@
                 <!-- Video Scroll Viewer -->
                 <ScrollViewer x:Name="VideoBrowserScroller" Background="{StaticResource SecondaryBrush}" Padding="6,6,6,6">
                     <StackPanel x:Name="VideosContainer" Margin="0,0,0,-6">
-                        <DockPanel Style="{StaticResource Video}">
-                            <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
-                            <Label Content="Video #1"/>
-                        </DockPanel>
-                        <DockPanel Style="{StaticResource Video}">
-                            <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
-                            <Label Content="Video #2"/>
-                        </DockPanel>
-                        <DockPanel Style="{StaticResource Video}">
-                            <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
-                            <Label Content="Video #3"/>
-                        </DockPanel>
-                        <DockPanel Style="{StaticResource Video}">
-                            <Grid Background="#FF47535A" Height="100" DockPanel.Dock="Top"></Grid>
-                            <Label Content="Video #4"/>
-                        </DockPanel>
+                        <Button Margin="0,0,0,6" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" HorizontalContentAlignment="Stretch">
+                            <DockPanel>
+                                <Grid Background="{StaticResource PrimaryBrush}" Height="100" DockPanel.Dock="Top"/>
+                                <Label Content="Example Video #1" Foreground="{StaticResource TextBrush}"/>
+                            </DockPanel>
+                        </Button>
                     </StackPanel>
                 </ScrollViewer>
             </DockPanel>

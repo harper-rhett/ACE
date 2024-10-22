@@ -6,8 +6,10 @@
              xmlns:local="clr-namespace:ACE"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="150">
-    <DockPanel Style="{StaticResource Video}">
-        <Grid Height="100" DockPanel.Dock="Top"/>
-        <Label x:Name="Label" Content="Video X"/>
-    </DockPanel>
+    <Button Margin="0,0,0,6" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" HorizontalContentAlignment="Stretch">
+        <DockPanel>
+            <Grid Background="{StaticResource PrimaryBrush}" Height="100" DockPanel.Dock="Top"/>
+            <Label x:Name="Label" Content="Video #0" Foreground="{StaticResource TextBrush}"/>
+        </DockPanel>
+    </Button>
 </UserControl>
