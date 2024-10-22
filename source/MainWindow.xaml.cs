@@ -86,6 +86,11 @@ namespace ACE
 				videoContainer.Label.Content = fileName;
 				VideosContainer.Children.Add(videoContainer);
 				videoContainer.Button.Click += (object sender, RoutedEventArgs e) => ClickVideo(VideosContainer.Children.IndexOf(videoContainer));
+
+				// Add thumbnail
+				videoContainer.Preview.Source = new Uri(filePath, UriKind.Absolute);
+				videoContainer.Preview.Play();
+				videoContainer.Preview.MediaOpened += (object sender, RoutedEventArgs e) => videoContainer.Preview.Pause();
 			}
 		}
 

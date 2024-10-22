@@ -8,7 +8,7 @@
              d:DesignHeight="150" d:DesignWidth="150">
     <Button x:Name="Button" Margin="0,0,0,6" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" HorizontalContentAlignment="Stretch">
         <DockPanel>
-            <Grid Background="{StaticResource PrimaryBrush}" Height="100" DockPanel.Dock="Top"/>
+            <MediaElement x:Name="Preview" Height="100" DockPanel.Dock="Top" LoadedBehavior="Manual"/>
             <Label x:Name="Label" Content="Example Video" Foreground="{StaticResource TextBrush}"/>
         </DockPanel>
     </Button>
