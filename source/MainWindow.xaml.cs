@@ -17,6 +17,8 @@ namespace ACE
 {
 	public partial class MainWindow : Window
 	{
+		private string[] ?videoPaths;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -77,12 +79,12 @@ namespace ACE
 		private void LoadVideos(string folderName, string folderPath)
 		{
 			// Get videos
-			string[] filePaths = Directory.GetFiles(folderPath, "*.mp4", SearchOption.AllDirectories);
-			Debug.Print($"Loading {filePaths.Length} videos at {folderPath}");
+			videoPaths = Directory.GetFiles(folderPath, "*.mp4", SearchOption.AllDirectories);
+			Debug.Print($"Loading {videoPaths.Length} videos at {folderPath}");
 
 			// Load previews
 			VideosContainer.Children.Clear();
-			foreach (string filePath in filePaths)
+			foreach (string filePath in videoPaths)
 			{
 				// Get file info
 				string fileName = Path.GetFileName(filePath);
