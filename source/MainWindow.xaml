@@ -43,12 +43,9 @@
                 <!-- Video Scroll Viewer -->
                 <ScrollViewer x:Name="VideoBrowserScroller" Background="{StaticResource SecondaryBrush}" Padding="6,6,6,6">
                     <StackPanel x:Name="VideosContainer" Margin="0,0,0,-6">
-                        <Button Margin="0,0,0,6" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" HorizontalContentAlignment="Stretch">
-                            <DockPanel>
-                                <Grid Background="{StaticResource PrimaryBrush}" Height="100" DockPanel.Dock="Top"/>
-                                <Label Content="Example Video #1" Foreground="{StaticResource TextBrush}"/>
-                            </DockPanel>
-                        </Button>
+                        <local:VideoContainer/>
+                        <local:VideoContainer/>
+                        <local:VideoContainer/>
                     </StackPanel>
                 </ScrollViewer>
             </DockPanel>
@@ -58,7 +55,9 @@
                 <!-- Video Viewer -->
                 <DockPanel x:Name="Viewport" DockPanel.Dock="Top" Margin="6,6,6,6" Height="250">
                     <Label x:Name="ViewportTitle" Content="Viewport" DockPanel.Dock="Top" Style="{StaticResource Title}"/>
-                    <Grid x:Name="ViewportVideo" Background="{StaticResource SecondaryBrush}"/>
+                    <Border x:Name="ViewportVideo" Background="{StaticResource SecondaryBrush}" Padding="6,6,6,6">
+                        <MediaElement x:Name="VideoPlayer"/>
+                    </Border>
                 </DockPanel>
 
                 <!-- Video Properties -->

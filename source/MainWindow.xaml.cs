@@ -99,7 +99,9 @@ namespace ACE
 
 		private void ClickVideo(int pathIndex)
 		{
-			Debug.Print($"Selecting video at path {videoPaths[pathIndex]}");
+			string videoPath = videoPaths[pathIndex];
+			Debug.Print($"Selecting video at path {videoPath}");
+			VideoPlayer.Source = new Uri(videoPath, UriKind.Absolute);
 		}
 	}
 }
