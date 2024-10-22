@@ -17,7 +17,7 @@ namespace ACE
 {
 	public partial class MainWindow : Window
 	{
-		private string[] ?videoPaths;
+		private string[] videoPaths = Array.Empty<string>();
 
 		public MainWindow()
 		{
@@ -93,7 +93,13 @@ namespace ACE
 				VideoContainer videoContainer = new();
 				videoContainer.Label.Content = fileName;
 				VideosContainer.Children.Add(videoContainer);
+				videoContainer.Button.Click += (object sender, RoutedEventArgs e) => ClickVideo(VideosContainer.Children.IndexOf(videoContainer));
 			}
+		}
+
+		private void ClickVideo(int pathIndex)
+		{
+			Debug.Print($"Selecting video at path {videoPaths[pathIndex]}");
 		}
 	}
 }
