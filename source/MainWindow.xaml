@@ -62,11 +62,10 @@
 
                 <!-- Video Properties -->
                 <DockPanel x:Name="Properties" Margin="6,6,6,6">
-                    <Label x:Name="PropertiesTitle" Content="Properties" DockPanel.Dock="Top" Style="{StaticResource Title}"/>
+                    <Label x:Name="PropertiesTitle" Content="Video Properties" DockPanel.Dock="Top" Style="{StaticResource Title}"/>
                     <Grid x:Name="PropertiesContainer" Background="{StaticResource SecondaryBrush}">
                         <TextBlock x:Name="PropertiesText" Padding="6,6,6,6" Style="{StaticResource Body}">
-                            This is where we might put some video properties.
-                            File size, video length, and debris information are just a few of the possibilities.
+                            Select a video to view its properties.
                         </TextBlock>
                     </Grid>
                 </DockPanel>

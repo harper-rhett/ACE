@@ -85,7 +85,7 @@ namespace ACE
 				VideoContainer videoContainer = new();
 				videoContainer.Label.Content = fileName;
 				VideosContainer.Children.Add(videoContainer);
-				videoContainer.Button.Click += (object sender, RoutedEventArgs e) => ClickVideo(VideosContainer.Children.IndexOf(videoContainer));
+				videoContainer.Button.Click += (object sender, RoutedEventArgs e) => SelectVideo(VideosContainer.Children.IndexOf(videoContainer));
 
 				// Add thumbnail
 				videoContainer.Preview.Source = new Uri(filePath, UriKind.Absolute);
@@ -94,11 +94,20 @@ namespace ACE
 			}
 		}
 
-		private void ClickVideo(int pathIndex)
+		private void SelectVideo(int pathIndex)
 		{
+			// Load playback
 			string videoPath = videoPaths[pathIndex];
 			Debug.Print($"Selecting video at path {videoPath}");
 			VideoPlayer.Source = new Uri(videoPath, UriKind.Absolute);
+
+			// Load video properties
+			FileInfo fileInfo = new FileInfo(videoPath);
+			PropertiesTitle.Content = $"{fileInfo.Name} Properties";
+			PropertiesText.Text = $"Path: {fileInfo.FullName}\n"
+				+ $"Creation Date: {fileInfo.CreationTime}\n"
+				+ $"Modification Date: {fileInfo.LastWriteTime}\n"
+				+ $"Size: ~{fileInfo.Length / 1_000_000} megabytes";
 		}
 	}
 }
