@@ -16,8 +16,8 @@
         <Menu x:Name="Toolbar" Height="32" DockPanel.Dock="Top" Background="{x:Null}">
             <!-- File Dropdown -->
             <MenuItem x:Name="File" Header="File">
-                <MenuItem x:Name="SelectDebrisVideosItem" Header="Select Debris Videos"></MenuItem>
-                <MenuItem x:Name="SelectAnnotatedVideosItem" Header="Select Annotated Videos"></MenuItem>
+                <MenuItem x:Name="SelectInputFolderItem" Header="SelectInputFolder"></MenuItem>
+                <MenuItem x:Name="SelectOutputFolderItem" Header="SelectOutputFolder"></MenuItem>
             </MenuItem>
 
             <!-- Setting Dropdown -->
@@ -27,7 +27,7 @@
             </MenuItem>
 
             <!-- Run Commands -->
-            <MenuItem x:Name="RunModelItem" Header="Run Model"/>
+            <MenuItem x:Name="RunItem" Header="Run"/>
             
         </Menu>
 

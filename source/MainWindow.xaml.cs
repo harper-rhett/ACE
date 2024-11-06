@@ -28,18 +28,19 @@ namespace ACE
 			VideosContainer.Children.Clear();
 
 			// Assign click events
-			SelectDebrisVideosItem.Click += SelectDebrisVideos;
+			SelectInputFolderItem.Click += SelectInputFolder;
+			RunItem.Click += Run;
 		}
 
-		private void SelectDebrisVideos(object sender, RoutedEventArgs e)
+		private void SelectInputFolder(object sender, RoutedEventArgs e)
 		{
 			// Initialize folder dialog
 			Microsoft.Win32.OpenFolderDialog folderDialog = new();
 			folderDialog.Multiselect = false;
-			folderDialog.Title = "Select Debris Videos";
+			folderDialog.Title = "Select Debris Video Folder";
+			bool? selectedFolder = folderDialog.ShowDialog();
 
 			// Check if selected or cancelled
-			bool? selectedFolder = folderDialog.ShowDialog();
 			if (selectedFolder == true)
 			{
 				// Load the selected folder
@@ -89,6 +90,30 @@ namespace ACE
 				+ $"Creation Date: {fileInfo.CreationTime}\n"
 				+ $"Modification Date: {fileInfo.LastWriteTime}\n"
 				+ $"Size: ~{fileInfo.Length / 1_000_000} megabytes";
+		}
+
+		private void Run(object sender, RoutedEventArgs e)
+		{
+			// Initialize folder dialog
+			Microsoft.Win32.OpenFolderDialog folderDialog = new();
+			folderDialog.Multiselect = false;
+			folderDialog.Title = "Select Output Folder";
+			bool? selectedFolder = folderDialog.ShowDialog();
+
+			// Check if selected or cancelled
+			string folderPath;
+			if (selectedFolder == true) folderPath = folderDialog.FolderName;
+			else return;
+
+			// Process videos
+			VideoProcessor videoProcessor = new(videoPaths);
+			videoProcessor.Process(folderPath);
+
+			// YO
+			// Input and output folder locations should be saved
+			// Right now the dialog uses the last location
+			// So the user might accidentally save their output
+			// to their input folder
 		}
 	}
 }
