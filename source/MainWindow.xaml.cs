@@ -28,26 +28,7 @@ namespace ACE
 			VideosContainer.Children.Clear();
 
 			// Assign click events
-			SelectTrainingDataItem.Click += SelectTrainingData;
 			SelectDebrisVideosItem.Click += SelectDebrisVideos;
-		}
-
-		private void SelectTrainingData(object sender, RoutedEventArgs e)
-		{
-			// Initialize folder dialog
-			Microsoft.Win32.OpenFolderDialog folderDialog = new();
-			folderDialog.Multiselect = false;
-			folderDialog.Title = "Select Training Data";
-
-			// Check if selected or cancelled
-			bool? selectedFolder = folderDialog.ShowDialog();
-			if (selectedFolder == true)
-			{
-				// Load the selected folder
-				string folderName = folderDialog.SafeFolderName;
-				string folderPath = folderDialog.FolderName;
-				LoadVideos(folderName, folderPath);
-			}
 		}
 
 		private void SelectDebrisVideos(object sender, RoutedEventArgs e)
