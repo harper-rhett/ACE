@@ -15,15 +15,15 @@
         <!-- Toolbar -->
         <Menu x:Name="Toolbar" Height="32" DockPanel.Dock="Top" Background="{x:Null}">
             <!-- File Dropdown -->
-            <MenuItem x:Name="File" Header="File">
+            <MenuItem x:Name="FileItem" Header="File">
                 <MenuItem x:Name="LoadInputVideosItem" Header="Load Input Videos"></MenuItem>
                 <MenuItem x:Name="LoadOutputVideosItem" Header="Load Output Videos"></MenuItem>
             </MenuItem>
 
             <!-- Setting Dropdown -->
-            <MenuItem x:Name="Settings" Header="Settings">
-                <MenuItem x:Name="Setting1" Header="Setting 1" IsCheckable="True"></MenuItem>
-                <MenuItem x:Name="Setting2" Header="Setting 2" IsCheckable="True"></MenuItem>
+            <MenuItem x:Name="SettingsItem" Header="Settings">
+                <MenuItem x:Name="Setting1Item" Header="Setting 1" IsCheckable="True"></MenuItem>
+                <MenuItem x:Name="Setting2Item" Header="Setting 2" IsCheckable="True"></MenuItem>
             </MenuItem>
 
             <!-- Run Commands -->

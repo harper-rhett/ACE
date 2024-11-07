@@ -13,116 +13,125 @@ using System.Windows.Navigation;
 using System.Diagnostics;
 using System.IO;
 
-namespace ACE
+// Current namespace
+namespace ACE;
+using ACE.Properties;
+
+public partial class MainWindow : Window
 {
-	public partial class MainWindow : Window
+	private string[] videoPaths = Array.Empty<string>();
+
+	public MainWindow()
 	{
-		private string[] videoPaths = Array.Empty<string>();
+		// Initialize
+		InitializeComponent();
 
-		public MainWindow()
+		// Clear videos container of example previews
+		VideosContainer.Children.Clear();
+
+		// Assign click events
+		LoadInputVideosItem.Click += SelectInputFolder;
+		RunItem.Click += Run;
+	}
+
+	private void SelectInputFolder(object sender, RoutedEventArgs e)
+	{
+		// Initialize folder dialog
+		Microsoft.Win32.OpenFolderDialog folderDialog = new();
+		folderDialog.Multiselect = false;
+		folderDialog.Title = "Select Debris Video Folder";
+		folderDialog.InitialDirectory = Settings.Default.InputPath;
+		bool? selectedFolder = folderDialog.ShowDialog();
+
+		// Check if selected or cancelled
+		if (selectedFolder == true)
 		{
-			// Initialize
-			InitializeComponent();
+			// Load the selected folder
+			string folderPath = folderDialog.FolderName;
+			LoadVideos(folderPath);
+			Settings.Default.InputPath = folderPath;
+			Settings.Default.Save();
+		}
+	}
 
-			// Clear videos container of example previews
-			VideosContainer.Children.Clear();
+	private void LoadVideos(string folderPath)
+	{
+		// Get videos
+		videoPaths = Directory.GetFiles(folderPath, "*.mp4", SearchOption.AllDirectories);
+		Debug.Print($"Loading {videoPaths.Length} videos at {folderPath}");
 
-			// Assign click events
-			LoadInputVideosItem.Click += SelectInputFolder;
-			RunItem.Click += Run;
+		// Load previews
+		VideosContainer.Children.Clear();
+		foreach (string filePath in videoPaths)
+		{
+			// Get file info
+			string fileName = Path.GetFileName(filePath);
+
+			// Add video preview to container
+			VideoContainer videoContainer = new();
+			videoContainer.Label.Content = fileName;
+			VideosContainer.Children.Add(videoContainer);
+			videoContainer.Button.Click += (object sender, RoutedEventArgs e) => SelectVideo(VideosContainer.Children.IndexOf(videoContainer));
+
+			// Add thumbnail
+			videoContainer.Preview.Source = new Uri(filePath, UriKind.Absolute);
+			videoContainer.Preview.Play();
+			videoContainer.Preview.MediaOpened += (object sender, RoutedEventArgs e) => videoContainer.Preview.Pause();
+		}
+	}
+
+	private void SelectVideo(int pathIndex)
+	{
+		// Load playback
+		string videoPath = videoPaths[pathIndex];
+		Debug.Print($"Selecting video at path {videoPath}");
+		VideoPlayer.Source = new Uri(videoPath, UriKind.Absolute);
+
+		// Load video properties
+		FileInfo fileInfo = new FileInfo(videoPath);
+		PropertiesTitle.Content = $"{fileInfo.Name} Properties";
+		PropertiesText.Text = $"Path: {fileInfo.FullName}\n"
+			+ $"Creation Date: {fileInfo.CreationTime}\n"
+			+ $"Modification Date: {fileInfo.LastWriteTime}\n"
+			+ $"Size: ~{fileInfo.Length / 1_000_000} megabytes";
+	}
+
+	private void Run(object sender, RoutedEventArgs e)
+	{
+		// Check if input has been loaded
+		if (videoPaths.Length == 0)
+		{
+			string warningText = "No input videos loaded.";
+			MessageBox.Show(warningText, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+			return;
 		}
 
-		private void SelectInputFolder(object sender, RoutedEventArgs e)
+		// Ask the user to choose a save location
+		string confirmationText = "Select the output folder.";
+		MessageBoxResult confirmation = MessageBox.Show(confirmationText, "Message", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+		if (confirmation == MessageBoxResult.Cancel) return;
+
+		// Initialize folder dialog
+		Microsoft.Win32.OpenFolderDialog folderDialog = new();
+		folderDialog.Multiselect = false;
+		folderDialog.Title = "Select Output Folder";
+		folderDialog.InitialDirectory = Settings.Default.OutputPath;
+		bool? selectedFolder = folderDialog.ShowDialog();
+
+		// Check if selected or cancelled
+		string folderSavePath;
+		if (selectedFolder == true)
 		{
-			// Initialize folder dialog
-			Microsoft.Win32.OpenFolderDialog folderDialog = new();
-			folderDialog.Multiselect = false;
-			folderDialog.Title = "Select Debris Video Folder";
-			bool? selectedFolder = folderDialog.ShowDialog();
-
-			// Check if selected or cancelled
-			if (selectedFolder == true)
-			{
-				// Load the selected folder
-				string folderPath = folderDialog.FolderName;
-				LoadVideos(folderPath);
-			}
+			folderSavePath = folderDialog.FolderName;
+			Settings.Default.OutputPath = folderSavePath;
+			Settings.Default.Save();
 		}
+		else return;
 
-		private void LoadVideos(string folderPath)
-		{
-			// Get videos
-			videoPaths = Directory.GetFiles(folderPath, "*.mp4", SearchOption.AllDirectories);
-			Debug.Print($"Loading {videoPaths.Length} videos at {folderPath}");
+		// Process videos
+		VideoProcessor.Process(videoPaths, folderSavePath);
 
-			// Load previews
-			VideosContainer.Children.Clear();
-			foreach (string filePath in videoPaths)
-			{
-				// Get file info
-				string fileName = Path.GetFileName(filePath);
-
-				// Add video preview to container
-				VideoContainer videoContainer = new();
-				videoContainer.Label.Content = fileName;
-				VideosContainer.Children.Add(videoContainer);
-				videoContainer.Button.Click += (object sender, RoutedEventArgs e) => SelectVideo(VideosContainer.Children.IndexOf(videoContainer));
-
-				// Add thumbnail
-				videoContainer.Preview.Source = new Uri(filePath, UriKind.Absolute);
-				videoContainer.Preview.Play();
-				videoContainer.Preview.MediaOpened += (object sender, RoutedEventArgs e) => videoContainer.Preview.Pause();
-			}
-		}
-
-		private void SelectVideo(int pathIndex)
-		{
-			// Load playback
-			string videoPath = videoPaths[pathIndex];
-			Debug.Print($"Selecting video at path {videoPath}");
-			VideoPlayer.Source = new Uri(videoPath, UriKind.Absolute);
-
-			// Load video properties
-			FileInfo fileInfo = new FileInfo(videoPath);
-			PropertiesTitle.Content = $"{fileInfo.Name} Properties";
-			PropertiesText.Text = $"Path: {fileInfo.FullName}\n"
-				+ $"Creation Date: {fileInfo.CreationTime}\n"
-				+ $"Modification Date: {fileInfo.LastWriteTime}\n"
-				+ $"Size: ~{fileInfo.Length / 1_000_000} megabytes";
-		}
-
-		private void Run(object sender, RoutedEventArgs e)
-		{
-			// Check if input has been loaded
-			if (videoPaths.Length == 0)
-			{
-				string warningText = "No input videos loaded.";
-				MessageBox.Show(warningText, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-				return;
-			}
-
-			// Ask the user to choose a save location
-			string confirmationText = "Select the output folder.";
-			MessageBoxResult confirmation = MessageBox.Show(confirmationText, "Message", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-			if (confirmation == MessageBoxResult.Cancel) return;
-
-			// Initialize folder dialog
-			Microsoft.Win32.OpenFolderDialog folderDialog = new();
-			folderDialog.Multiselect = false;
-			folderDialog.Title = "Select Output Folder";
-			bool? selectedFolder = folderDialog.ShowDialog();
-
-			// Check if selected or cancelled
-			string folderSavePath;
-			if (selectedFolder == true) folderSavePath = folderDialog.FolderName;
-			else return;
-
-			// Process videos
-			VideoProcessor videoProcessor = new(videoPaths);
-			videoProcessor.ProcessVideos(folderSavePath);
-
-			// Load videos
-			LoadVideos(folderSavePath);
-		}
+		// Load videos
+		LoadVideos(folderSavePath);
 	}
 }
