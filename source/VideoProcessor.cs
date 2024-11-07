@@ -23,12 +23,14 @@ namespace ACE
 			this.videoPaths = videoPaths;
 		}
 
-		public void Process(string folderSavePath)
+		public void ProcessVideos(string folderSavePath)
 		{
-			// Get just the first video for now
-			// later, loop through them all
-			string videoPath = videoPaths[0];
+			foreach (string videoPath in videoPaths)
+				ProcessVideo(videoPath, folderSavePath);
+		}
 
+		public void ProcessVideo(string videoPath, string folderSavePath)
+		{
 			// Create video capture with memory safety
 			using VideoCapture videoCapture = new(videoPath);
 

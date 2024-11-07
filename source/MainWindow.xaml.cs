@@ -44,13 +44,12 @@ namespace ACE
 			if (selectedFolder == true)
 			{
 				// Load the selected folder
-				string folderName = folderDialog.SafeFolderName;
 				string folderPath = folderDialog.FolderName;
-				LoadVideos(folderName, folderPath);
+				LoadVideos(folderPath);
 			}
 		}
 
-		private void LoadVideos(string folderName, string folderPath)
+		private void LoadVideos(string folderPath)
 		{
 			// Get videos
 			videoPaths = Directory.GetFiles(folderPath, "*.mp4", SearchOption.AllDirectories);
@@ -114,13 +113,16 @@ namespace ACE
 			bool? selectedFolder = folderDialog.ShowDialog();
 
 			// Check if selected or cancelled
-			string folderPath;
-			if (selectedFolder == true) folderPath = folderDialog.FolderName;
+			string folderSavePath;
+			if (selectedFolder == true) folderSavePath = folderDialog.FolderName;
 			else return;
 
 			// Process videos
 			VideoProcessor videoProcessor = new(videoPaths);
-			videoProcessor.Process(folderPath);
+			videoProcessor.ProcessVideos(folderSavePath);
+
+			// Load videos
+			LoadVideos(folderSavePath);
 		}
 	}
 }
