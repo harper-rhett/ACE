@@ -10,6 +10,7 @@ using Emgu.CV;
 using Emgu.CV.CvEnum;
 using System.Drawing;
 using System.Windows.Controls;
+using System.Diagnostics;
 
 namespace ACE
 {
@@ -37,12 +38,11 @@ namespace ACE
 			Size size = new(videoCapture.Width, videoCapture.Height);
 
 			// Determine new path for video output
-			string videoName = Path.GetFileName(videoPath) + "_out";
+			string videoName = Path.GetFileNameWithoutExtension(videoPath) + "_out" + ".mp4";
 			string videoSavePath = Path.Combine(folderSavePath, videoName);
 
 			// Create video writer with memory safety
-			// ERROR THROWN HERE, CODEC NOT WORKING
-			using VideoWriter videoWriter = new(videoSavePath, VideoWriter.Fourcc('X', '2', '6', '4'), fps, size, true);
+			using VideoWriter videoWriter = new(videoSavePath, VideoWriter.Fourcc('H', '2', '6', '4'), fps, size, true);
 
 			// Read frames from video capture
 			Mat[] frames = new Mat[frameCount];

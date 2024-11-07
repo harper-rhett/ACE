@@ -28,7 +28,7 @@ namespace ACE
 			VideosContainer.Children.Clear();
 
 			// Assign click events
-			SelectInputFolderItem.Click += SelectInputFolder;
+			LoadInputVideosItem.Click += SelectInputFolder;
 			RunItem.Click += Run;
 		}
 
@@ -94,6 +94,19 @@ namespace ACE
 
 		private void Run(object sender, RoutedEventArgs e)
 		{
+			// Check if input has been loaded
+			if (videoPaths.Length == 0)
+			{
+				string warningText = "No input videos loaded.";
+				MessageBox.Show(warningText, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+				return;
+			}
+
+			// Ask the user to choose a save location
+			string confirmationText = "Select the output folder.";
+			MessageBoxResult confirmation = MessageBox.Show(confirmationText, "Message", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+			if (confirmation == MessageBoxResult.Cancel) return;
+
 			// Initialize folder dialog
 			Microsoft.Win32.OpenFolderDialog folderDialog = new();
 			folderDialog.Multiselect = false;
@@ -108,12 +121,6 @@ namespace ACE
 			// Process videos
 			VideoProcessor videoProcessor = new(videoPaths);
 			videoProcessor.Process(folderPath);
-
-			// YO
-			// Input and output folder locations should be saved
-			// Right now the dialog uses the last location
-			// So the user might accidentally save their output
-			// to their input folder
 		}
 	}
 }
