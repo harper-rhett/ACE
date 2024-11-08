@@ -9,7 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\OpenFolder.png" />
+    <None Remove="Icons\Settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Emgu.CV.runtime.windows" Version="4.9.0.5494" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\OpenFolder.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Settings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

@@ -17,6 +17,10 @@
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource TertiaryColor}"/>
     <SolidColorBrush x:Key="MenuHeaderBrush" Color="{StaticResource MenuHeaderColor}"/>
     <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+    
+    <!-- Icons -->
+    <Image x:Key="OpenFolderIcon" x:Shared="false" Source="Icons/OpenFolder.png"/>
+    <Image x:Key="SettingsIcon" x:Shared="false" Source="Icons/Settings.png"/>
 
     <!-- Menu Item Style -->
     <Style TargetType="MenuItem">

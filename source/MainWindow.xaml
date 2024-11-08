@@ -14,14 +14,14 @@
         <Menu x:Name="Toolbar" Height="32" DockPanel.Dock="Top" Background="{x:Null}">
             <!-- File Dropdown -->
             <MenuItem x:Name="FileItem" Header="File">
-                <MenuItem x:Name="LoadInputVideosItem" Header="Load Input Videos"></MenuItem>
-                <MenuItem x:Name="LoadOutputVideosItem" Header="Load Output Videos"></MenuItem>
+                <MenuItem x:Name="LoadInputVideosItem" Header="Load Input Videos" Icon="{StaticResource OpenFolderIcon}"/>
+                <MenuItem x:Name="LoadOutputVideosItem" Header="Load Output Videos" Icon="{StaticResource OpenFolderIcon}"/>
             </MenuItem>
 
             <!-- Setting Dropdown -->
             <MenuItem x:Name="SettingsItem" Header="Settings">
-                <MenuItem x:Name="Setting1Item" Header="Setting 1" IsCheckable="True"></MenuItem>
-                <MenuItem x:Name="Setting2Item" Header="Setting 2" IsCheckable="True"></MenuItem>
+                <MenuItem x:Name="ExampleSetting1" Header="Example Setting 1" IsCheckable="True" Icon="{StaticResource SettingsIcon}"/>
+                <MenuItem x:Name="ExampleSetting2" Header="Example Setting 2" IsCheckable="True" Icon="{StaticResource SettingsIcon}"/>
             </MenuItem>
 
             <!-- Run Commands -->
