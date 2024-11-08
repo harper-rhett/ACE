@@ -40,7 +40,9 @@ public partial class MainWindow : Window
 		Microsoft.Win32.OpenFolderDialog folderDialog = new();
 		folderDialog.Multiselect = false;
 		folderDialog.Title = "Select Debris Video Folder";
-		folderDialog.InitialDirectory = Settings.Default.InputPath;
+		string? parentDirectory = Path.GetDirectoryName(Settings.Default.InputPath);
+		folderDialog.InitialDirectory = parentDirectory;
+		folderDialog.FolderName = Settings.Default.InputPath;
 		bool? selectedFolder = folderDialog.ShowDialog();
 
 		// Check if selected or cancelled
@@ -115,7 +117,9 @@ public partial class MainWindow : Window
 		Microsoft.Win32.OpenFolderDialog folderDialog = new();
 		folderDialog.Multiselect = false;
 		folderDialog.Title = "Select Output Folder";
-		folderDialog.InitialDirectory = Settings.Default.OutputPath;
+		string? parentDirectory = Path.GetDirectoryName(Settings.Default.OutputPath);
+		folderDialog.InitialDirectory = parentDirectory;
+		folderDialog.FolderName = Settings.Default.OutputPath;
 		bool? selectedFolder = folderDialog.ShowDialog();
 
 		// Check if selected or cancelled
