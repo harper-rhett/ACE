@@ -1,6 +1,4 @@
-﻿<!-- Colors: https://www.figma.com/colors/gunmetal-gray/ -->
-
-<!-- Main Window -->
+﻿<!-- Main Window -->
 <Window x:Class="ACE.MainWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
