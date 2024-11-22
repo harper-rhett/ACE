@@ -1,4 +1,4 @@
-﻿// Default namespaces
+﻿// Namespaces
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
