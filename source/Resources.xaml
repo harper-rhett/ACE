@@ -20,7 +20,11 @@
     
     <!-- Icons -->
     <Image x:Key="OpenFolderIcon" x:Shared="false" Source="Icons/OpenFolder.png"/>
+    <Image x:Key="AddFolderIcon" x:Shared="false" Source="Icons/AddFolder.png"/>
+    <Image x:Key="FolderOpenedIcon" x:Shared="false" Source="Icons/FolderOpened.png"/>
     <Image x:Key="SettingsIcon" x:Shared="false" Source="Icons/Settings.png"/>
+    <Image x:Key="SaveIcon" x:Shared="false" Source="Icons/Save.png"/>
+    <Image x:Key="SaveAsIcon" x:Shared="false" Source="Icons/SaveAs.png"/>
 
     <!-- Menu Item Style -->
     <Style TargetType="MenuItem">

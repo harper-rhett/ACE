@@ -9,7 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\AddFolder.png" />
+    <None Remove="Icons\FolderOpened.png" />
     <None Remove="Icons\OpenFolder.png" />
+    <None Remove="Icons\Save.png" />
+    <None Remove="Icons\SaveAs.png" />
     <None Remove="Icons\Settings.png" />
   </ItemGroup>
 
@@ -18,7 +22,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Icons\AddFolder.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\FolderOpened.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Icons\OpenFolder.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Save.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\SaveAs.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Settings.png">
