@@ -28,20 +28,15 @@ static class VideoProcessor
 		Stopwatch stopwatch = new();
 		stopwatch.Start();
 
+		// Process the videos in threads
+		List<Thread> threads = new();
 		foreach (string videoPath in videoPaths)
 		{
-			Process(videoPath, folderSavePath);
+			Thread thread = new(() => Process(videoPath, folderSavePath));
+			thread.Start();
+			threads.Add(thread);
 		}
-
-		//List<Thread> threads = new();
-		//foreach (string videoPath in videoPaths)
-		//{
-		//	Thread thread = new(() => Process(videoPath, folderSavePath));
-		//	thread.Start();
-		//	threads.Add(thread);
-		//}
-
-		//foreach (Thread thread in threads) thread.Join();
+		foreach (Thread thread in threads) thread.Join();
 
 		// Stop stopwatch and print results
 		stopwatch.Stop();
@@ -67,12 +62,12 @@ static class VideoProcessor
 		using VideoWriter videoWriter = new(videoSavePath, VideoWriter.Fourcc('H', '2', '6', '4'), fps, size, true);
 		
 		// Set up background subtraction
-		BackgroundSubtractorMOG2 backgroundSubtractor = new();
+		using BackgroundSubtractorMOG2 backgroundSubtractor = new();
 		backgroundSubtractor.History = 30;
 		backgroundSubtractor.VarThreshold = 40;
 
 		// Set up blob detection
-		SimpleBlobDetectorParams blobDetectorParams = new()
+		using SimpleBlobDetectorParams blobDetectorParams = new()
 		{
 			FilterByArea = true,
 			FilterByCircularity = false,
@@ -81,20 +76,19 @@ static class VideoProcessor
 			MinArea = 1,
 			MaxArea = 100_000
 		};
-		SimpleBlobDetector blobDetector = new(blobDetectorParams);
+		using SimpleBlobDetector blobDetector = new(blobDetectorParams);
 		int blobs = 0;
 
 		// Read frames from video capture
-		Mat[] frames = new Mat[frameCount];
-		Mat sourceFrame = new();
+		using Mat sourceFrame = new();
 		while (videoCapture.Read(sourceFrame))
 		{
 			// Resize frame
-			Mat downsizedFrame = new();
+			using Mat downsizedFrame = new();
 			CvInvoke.Resize(sourceFrame, downsizedFrame, processSize, interpolation: Inter.Linear);
 
 			// Subtract the background
-			Mat workingFrame = new();
+			using Mat workingFrame = new();
 			backgroundSubtractor.Apply(downsizedFrame, workingFrame);
 
 			// Remove noise
@@ -104,7 +98,7 @@ static class VideoProcessor
 			CvInvoke.Threshold(workingFrame, workingFrame, 127, 255, ThresholdType.Binary);
 
 			// Blob detection
-			VectorOfKeyPoint keypoints = new VectorOfKeyPoint();
+			using VectorOfKeyPoint keypoints = new VectorOfKeyPoint();
 			blobDetector.Detect(workingFrame, keypoints);
 
 			// Draw blobs
@@ -112,7 +106,7 @@ static class VideoProcessor
 			blobs += keypoints.Size;
 			
 			// Resize again
-			Mat upsizedFrame = new();
+			using Mat upsizedFrame = new();
 			CvInvoke.Resize(workingFrame, upsizedFrame, size, interpolation: Inter.Cubic);
 
 			// Write frame to video
