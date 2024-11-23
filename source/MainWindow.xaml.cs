@@ -16,6 +16,7 @@ using System.IO;
 // Current namespace
 namespace ACE;
 using ACE.Properties;
+using System.Security.Policy;
 
 public partial class MainWindow : Window
 {
@@ -34,6 +35,7 @@ public partial class MainWindow : Window
 		LoadLastInputVideosItem.Click += (object sender, RoutedEventArgs e) => SelectLastInputFolder();
 		ToNewOutputFolderItem.Click += (object sender, RoutedEventArgs e) => SelectOutputFolder();
 		ToLastOutputFolderItem.Click += (object sender, RoutedEventArgs e) => SelectLastOutputFolder();
+		HelpItem.Click += (object sender, RoutedEventArgs e) => Help();
 	}
 
 	private void SelectInputFolder()
@@ -165,5 +167,10 @@ public partial class MainWindow : Window
 
 		// Load videos
 		LoadVideos(folderPath);
+	}
+
+	private void Help()
+	{
+		Process.Start(new ProcessStartInfo { FileName = "https://github.com/harper-rhett/ACE/wiki/User-Guide", UseShellExecute = true });
 	}
 }

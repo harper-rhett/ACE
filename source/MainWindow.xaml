@@ -30,6 +30,9 @@
                 <MenuItem x:Name="ToNewOutputFolderItem" Header="To New Output Folder" Icon="{StaticResource SaveAsIcon}"/>
                 <MenuItem x:Name="ToLastOutputFolderItem" Header="To Last Output Folder" Icon="{StaticResource SaveIcon}"/>
             </MenuItem>
+            
+            <!-- Help -->
+            <MenuItem x:Name="HelpItem" Header="Help"/>
 
         </Menu>
 
