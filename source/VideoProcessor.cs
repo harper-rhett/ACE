@@ -23,8 +23,29 @@ static class VideoProcessor
 {
 	public static void Process(string[] videoPaths, string folderSavePath)
 	{
+		// Start a stopwatch to measure time
+		Debug.Print("Started processing videos.");
+		Stopwatch stopwatch = new();
+		stopwatch.Start();
+
 		foreach (string videoPath in videoPaths)
+		{
 			Process(videoPath, folderSavePath);
+		}
+
+		//List<Thread> threads = new();
+		//foreach (string videoPath in videoPaths)
+		//{
+		//	Thread thread = new(() => Process(videoPath, folderSavePath));
+		//	thread.Start();
+		//	threads.Add(thread);
+		//}
+
+		//foreach (Thread thread in threads) thread.Join();
+
+		// Stop stopwatch and print results
+		stopwatch.Stop();
+		Debug.Print($"Completed processing videos in {stopwatch.Elapsed.TotalSeconds} seconds.");
 	}
 
 	public static void Process(string videoPath, string folderSavePath)
@@ -73,29 +94,26 @@ static class VideoProcessor
 			CvInvoke.Resize(sourceFrame, downsizedFrame, processSize, interpolation: Inter.Linear);
 
 			// Subtract the background
-			Mat foregroundFrame = new();
-			backgroundSubtractor.Apply(downsizedFrame, foregroundFrame);
+			Mat workingFrame = new();
+			backgroundSubtractor.Apply(downsizedFrame, workingFrame);
 
 			// Remove noise
-			Mat noiselessFrame = new();
-			CvInvoke.MedianBlur(foregroundFrame, noiselessFrame, 5);
+			CvInvoke.MedianBlur(workingFrame, workingFrame, 5);
 
 			// Convert to binary video
-			Mat binaryFrame = new Mat();
-			CvInvoke.Threshold(noiselessFrame, binaryFrame, 127, 255, ThresholdType.Binary);
+			CvInvoke.Threshold(workingFrame, workingFrame, 127, 255, ThresholdType.Binary);
 
 			// Blob detection
 			VectorOfKeyPoint keypoints = new VectorOfKeyPoint();
-			blobDetector.Detect(binaryFrame, keypoints);
+			blobDetector.Detect(workingFrame, keypoints);
 
 			// Draw blobs
-			Mat blobsFrame = new Mat();
-			Features2DToolbox.DrawKeypoints(binaryFrame, keypoints, blobsFrame, new Bgr(0, 255, 0));
+			Features2DToolbox.DrawKeypoints(workingFrame, keypoints, workingFrame, new Bgr(0, 255, 0));
 			blobs += keypoints.Size;
 			
 			// Resize again
 			Mat upsizedFrame = new();
-			CvInvoke.Resize(blobsFrame, upsizedFrame, size, interpolation: Inter.Cubic);
+			CvInvoke.Resize(workingFrame, upsizedFrame, size, interpolation: Inter.Cubic);
 
 			// Write frame to video
 			videoWriter.Write(upsizedFrame);
