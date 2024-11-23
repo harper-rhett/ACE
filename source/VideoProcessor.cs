@@ -14,6 +14,7 @@ using Emgu.CV.Features2D;
 using Emgu.CV.Linemod;
 using Emgu.CV.Util;
 using System.Diagnostics;
+using Emgu.CV.VideoStab;
 
 // Current namespace
 namespace ACE;
@@ -43,34 +44,33 @@ static class VideoProcessor
 
 		// Create video writer with memory safety
 		using VideoWriter videoWriter = new(videoSavePath, VideoWriter.Fourcc('H', '2', '6', '4'), fps, size, true);
-
-		// Set up tools
+		
+		// Set up background subtraction
 		BackgroundSubtractorMOG2 backgroundSubtractor = new();
 		backgroundSubtractor.History = 30;
 		backgroundSubtractor.VarThreshold = 40;
+
+		// Set up blob detection
 		SimpleBlobDetectorParams blobDetectorParams = new()
 		{
 			FilterByArea = true,
 			FilterByCircularity = false,
 			FilterByConvexity = false,
 			FilterByInertia = false,
-			MinArea = 50,
-			MaxArea = 10_000
+			MinArea = 1,
+			MaxArea = 100_000
 		};
 		SimpleBlobDetector blobDetector = new(blobDetectorParams);
+		int blobs = 0;
 
 		// Read frames from video capture
 		Mat[] frames = new Mat[frameCount];
 		Mat sourceFrame = new();
-
-		int blobs = 0;
 		while (videoCapture.Read(sourceFrame))
 		{
 			// Resize frame
 			Mat downsizedFrame = new();
 			CvInvoke.Resize(sourceFrame, downsizedFrame, processSize, interpolation: Inter.Linear);
-
-			// I MAY NEED TO STABILIZE FOOTAGE BEFORE SUBTRACTING THE BACKGROUND
 
 			// Subtract the background
 			Mat foregroundFrame = new();
@@ -82,19 +82,20 @@ static class VideoProcessor
 
 			// Convert to binary video
 			Mat binaryFrame = new Mat();
-			CvInvoke.Threshold(foregroundFrame, binaryFrame, 127, 255, ThresholdType.Binary);
+			CvInvoke.Threshold(noiselessFrame, binaryFrame, 127, 255, ThresholdType.Binary);
 
 			// Blob detection
-			// NOTE: Consider connected components or contour detection alternatively
 			VectorOfKeyPoint keypoints = new VectorOfKeyPoint();
 			blobDetector.Detect(binaryFrame, keypoints);
+
+			// Draw blobs
 			Mat blobsFrame = new Mat();
-			Features2DToolbox.DrawKeypoints(downsizedFrame, keypoints, blobsFrame, new Bgr(0, 255, 0));
+			Features2DToolbox.DrawKeypoints(binaryFrame, keypoints, blobsFrame, new Bgr(0, 255, 0));
 			blobs += keypoints.Size;
 			
 			// Resize again
 			Mat upsizedFrame = new();
-			CvInvoke.Resize(binaryFrame, upsizedFrame, size, interpolation: Inter.Cubic);
+			CvInvoke.Resize(blobsFrame, upsizedFrame, size, interpolation: Inter.Cubic);
 
 			// Write frame to video
 			videoWriter.Write(upsizedFrame);

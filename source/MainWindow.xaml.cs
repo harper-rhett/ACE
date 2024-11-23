@@ -30,11 +30,13 @@ public partial class MainWindow : Window
 		VideosContainer.Children.Clear();
 
 		// Assign click events
-		LoadInputVideosItem.Click += SelectInputFolder;
-		RunItem.Click += Run;
+		LoadInputVideosItem.Click += (object sender, RoutedEventArgs e) => SelectInputFolder();
+		LoadLastInputVideosItem.Click += (object sender, RoutedEventArgs e) => SelectLastInputFolder();
+		NewOutputFolderItem.Click += (object sender, RoutedEventArgs e) => SelectOutputFolder();
+		LastOutputFolderItem.Click += (object sender, RoutedEventArgs e) => SelectLastOutputFolder();
 	}
 
-	private void SelectInputFolder(object sender, RoutedEventArgs e)
+	private void SelectInputFolder()
 	{
 		// Initialize folder dialog
 		Microsoft.Win32.OpenFolderDialog folderDialog = new();
@@ -54,6 +56,15 @@ public partial class MainWindow : Window
 			Settings.Default.InputPath = folderPath;
 			Settings.Default.Save();
 		}
+	}
+
+	private void SelectLastInputFolder()
+	{
+		// Check if exists
+		string folderPath = Settings.Default.InputPath;
+		bool hasPath = folderPath.Length > 3;
+		if (!hasPath) return;
+		LoadVideos(folderPath);
 	}
 
 	private void LoadVideos(string folderPath)
@@ -98,7 +109,7 @@ public partial class MainWindow : Window
 			+ $"Size: ~{fileInfo.Length / 1_000_000} megabytes";
 	}
 
-	private void Run(object sender, RoutedEventArgs e)
+	private void SelectOutputFolder()
 	{
 		// Check if input has been loaded
 		if (videoPaths.Length == 0)
@@ -107,11 +118,6 @@ public partial class MainWindow : Window
 			MessageBox.Show(warningText, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
 			return;
 		}
-
-		// Ask the user to choose a save location
-		string confirmationText = "Select the output folder.";
-		MessageBoxResult confirmation = MessageBox.Show(confirmationText, "Message", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-		if (confirmation == MessageBoxResult.Cancel) return;
 
 		// Initialize folder dialog
 		Microsoft.Win32.OpenFolderDialog folderDialog = new();
@@ -137,5 +143,27 @@ public partial class MainWindow : Window
 
 		// Load videos
 		LoadVideos(folderSavePath);
+	}
+
+	private void SelectLastOutputFolder()
+	{
+		// Check if input has been loaded
+		if (videoPaths.Length == 0)
+		{
+			string warningText = "No input videos loaded.";
+			MessageBox.Show(warningText, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+			return;
+		}
+
+		// Check if exists
+		string folderPath = Settings.Default.OutputPath;
+		bool hasPath = folderPath.Length > 3;
+		if (!hasPath) return;
+
+		// Process videos
+		VideoProcessor.Process(videoPaths, folderPath);
+
+		// Load videos
+		LoadVideos(folderPath);
 	}
 }

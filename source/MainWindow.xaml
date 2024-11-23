@@ -15,6 +15,7 @@
             <!-- File Dropdown -->
             <MenuItem x:Name="FileItem" Header="File">
                 <MenuItem x:Name="LoadInputVideosItem" Header="Load Input Videos" Icon="{StaticResource OpenFolderIcon}"/>
+                <MenuItem x:Name="LoadLastInputVideosItem" Header="Load Last Input Videos" Icon="{StaticResource OpenFolderIcon}"/>
                 <MenuItem x:Name="LoadOutputVideosItem" Header="Load Output Videos" Icon="{StaticResource OpenFolderIcon}"/>
             </MenuItem>
 
@@ -25,8 +26,11 @@
             </MenuItem>
 
             <!-- Run Commands -->
-            <MenuItem x:Name="RunItem" Header="Run"/>
-            
+            <MenuItem x:Name="RunItem" Header="Run">
+                <MenuItem x:Name="NewOutputFolderItem" Header="New Output Folder" Icon="{StaticResource OpenFolderIcon}"/>
+                <MenuItem x:Name="LastOutputFolderItem" Header="Last Output Folder" Icon="{StaticResource OpenFolderIcon}"/>
+            </MenuItem>
+
         </Menu>
 
         <!-- Application Content -->
