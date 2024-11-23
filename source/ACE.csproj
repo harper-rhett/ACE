@@ -15,6 +15,7 @@
     <None Remove="Icons\Save.png" />
     <None Remove="Icons\SaveAs.png" />
     <None Remove="Icons\Settings.png" />
+    <None Remove="Icons\StatusHelp.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Settings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\StatusHelp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

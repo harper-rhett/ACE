@@ -32,7 +32,9 @@
             </MenuItem>
             
             <!-- Help -->
-            <MenuItem x:Name="HelpItem" Header="Help"/>
+            <MenuItem x:Name="HelpItem" Header="Help">
+                <MenuItem x:Name="OpenUserGuideItem" Header="Open User Guide" Icon="{StaticResource StatusHelpIcon}"/>
+            </MenuItem>
 
         </Menu>
 

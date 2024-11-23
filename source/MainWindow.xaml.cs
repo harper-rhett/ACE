@@ -35,7 +35,7 @@ public partial class MainWindow : Window
 		LoadLastInputVideosItem.Click += (object sender, RoutedEventArgs e) => SelectLastInputFolder();
 		ToNewOutputFolderItem.Click += (object sender, RoutedEventArgs e) => SelectOutputFolder();
 		ToLastOutputFolderItem.Click += (object sender, RoutedEventArgs e) => SelectLastOutputFolder();
-		HelpItem.Click += (object sender, RoutedEventArgs e) => Help();
+		OpenUserGuideItem.Click += (object sender, RoutedEventArgs e) => OpenUserGuide();
 	}
 
 	private void SelectInputFolder()
@@ -169,7 +169,7 @@ public partial class MainWindow : Window
 		LoadVideos(folderPath);
 	}
 
-	private void Help()
+	private void OpenUserGuide()
 	{
 		Process.Start(new ProcessStartInfo { FileName = "https://github.com/harper-rhett/ACE/wiki/User-Guide", UseShellExecute = true });
 	}

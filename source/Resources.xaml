@@ -25,6 +25,7 @@
     <Image x:Key="SettingsIcon" x:Shared="false" Source="Icons/Settings.png"/>
     <Image x:Key="SaveIcon" x:Shared="false" Source="Icons/Save.png"/>
     <Image x:Key="SaveAsIcon" x:Shared="false" Source="Icons/SaveAs.png"/>
+    <Image x:Key="StatusHelpIcon" x:Shared="false" Source="Icons/StatusHelp.png"/>
 
     <!-- Menu Item Style -->
     <Style TargetType="MenuItem">
