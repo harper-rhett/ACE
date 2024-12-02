@@ -14,9 +14,8 @@
         <Menu x:Name="Toolbar" Height="32" DockPanel.Dock="Top" Background="{x:Null}">
             <!-- File Dropdown -->
             <MenuItem x:Name="FileItem" Header="File">
-                <MenuItem x:Name="LoadInputVideosItem" Header="Load Input Videos" Icon="{StaticResource OpenFolderIcon}"/>
+                <MenuItem x:Name="LoadNewInputVideosItem" Header="Load New Input Videos" Icon="{StaticResource OpenFolderIcon}"/>
                 <MenuItem x:Name="LoadLastInputVideosItem" Header="Load Last Input Videos" Icon="{StaticResource OpenFolderIcon}"/>
-                <MenuItem x:Name="LoadOutputVideosItem" Header="Load Output Videos" Icon="{StaticResource OpenFolderIcon}"/>
             </MenuItem>
 
             <!-- Setting Dropdown -->

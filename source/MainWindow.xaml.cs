@@ -31,7 +31,7 @@ public partial class MainWindow : Window
 		VideosContainer.Children.Clear();
 
 		// Assign click events
-		LoadInputVideosItem.Click += (object sender, RoutedEventArgs e) => SelectInputFolder();
+		LoadNewInputVideosItem.Click += (object sender, RoutedEventArgs e) => SelectInputFolder();
 		LoadLastInputVideosItem.Click += (object sender, RoutedEventArgs e) => SelectLastInputFolder();
 		ToNewOutputFolderItem.Click += (object sender, RoutedEventArgs e) => SelectOutputFolder();
 		ToLastOutputFolderItem.Click += (object sender, RoutedEventArgs e) => SelectLastOutputFolder();

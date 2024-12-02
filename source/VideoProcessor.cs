@@ -60,7 +60,7 @@ static class VideoProcessor
 
 		// Create video writer with memory safety
 		using VideoWriter videoWriter = new(videoSavePath, VideoWriter.Fourcc('H', '2', '6', '4'), fps, size, true);
-		
+
 		// Set up background subtraction
 		using BackgroundSubtractorMOG2 backgroundSubtractor = new();
 		backgroundSubtractor.History = 30;
@@ -73,7 +73,7 @@ static class VideoProcessor
 			FilterByCircularity = false,
 			FilterByConvexity = false,
 			FilterByInertia = false,
-			MinArea = 1,
+			MinArea = 50,
 			MaxArea = 100_000
 		};
 		using SimpleBlobDetector blobDetector = new(blobDetectorParams);
@@ -95,19 +95,23 @@ static class VideoProcessor
 			CvInvoke.MedianBlur(workingFrame, workingFrame, 5);
 
 			// Convert to binary video
-			CvInvoke.Threshold(workingFrame, workingFrame, 127, 255, ThresholdType.Binary);
+			CvInvoke.Threshold(workingFrame, workingFrame, 127, 255, ThresholdType.BinaryInv);
 
 			// Blob detection
-			using VectorOfKeyPoint keypoints = new VectorOfKeyPoint();
-			blobDetector.Detect(workingFrame, keypoints);
+			using VectorOfKeyPoint keyPoints = new VectorOfKeyPoint();
+			blobDetector.DetectRaw(workingFrame, keyPoints);
 
 			// Draw blobs
-			Features2DToolbox.DrawKeypoints(workingFrame, keypoints, workingFrame, new Bgr(0, 255, 0));
-			blobs += keypoints.Size;
-			
+			foreach (MKeyPoint keyPoint in keyPoints.ToArray())
+			{
+				Point point = new Point((int)keyPoint.Point.X, (int)keyPoint.Point.Y);
+				CvInvoke.Circle(downsizedFrame, point, (int)keyPoint.Size, new MCvScalar(0, 255, 0));
+			}
+			blobs += keyPoints.Size;
+
 			// Resize again
 			using Mat upsizedFrame = new();
-			CvInvoke.Resize(workingFrame, upsizedFrame, size, interpolation: Inter.Cubic);
+			CvInvoke.Resize(downsizedFrame, upsizedFrame, size, interpolation: Inter.Cubic);
 
 			// Write frame to video
 			videoWriter.Write(upsizedFrame);
