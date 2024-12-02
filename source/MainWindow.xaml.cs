@@ -111,7 +111,7 @@ public partial class MainWindow : Window
 			+ $"Size: ~{fileInfo.Length / 1_000_000} megabytes";
 	}
 
-	private void SelectOutputFolder()
+	private async void SelectOutputFolder()
 	{
 		// Check if input has been loaded
 		if (videoPaths.Length == 0)
@@ -141,7 +141,16 @@ public partial class MainWindow : Window
 		else return;
 
 		// Process videos
-		VideoProcessor.Process(videoPaths, folderSavePath);
+		Task processTask = Task.Run(() => VideoProcessor.Process(videoPaths, folderSavePath));
+
+		// Open loading bar
+		LoadingBar loadingBar = new();
+		loadingBar.Owner = this;
+		loadingBar.ShowDialog();
+
+		// Close loading bar
+		await processTask;
+		loadingBar.Close();
 
 		// Load videos
 		LoadVideos(folderSavePath);
