@@ -111,7 +111,7 @@ public partial class MainWindow : Window
 			+ $"Size: ~{fileInfo.Length / 1_000_000} megabytes";
 	}
 
-	private async void SelectOutputFolder()
+	private void SelectOutputFolder()
 	{
 		// Check if input has been loaded
 		if (videoPaths.Length == 0)
@@ -131,32 +131,20 @@ public partial class MainWindow : Window
 		bool? selectedFolder = folderDialog.ShowDialog();
 
 		// Check if selected or cancelled
-		string folderSavePath;
+		string folderPath;
 		if (selectedFolder == true)
 		{
-			folderSavePath = folderDialog.FolderName;
-			Settings.Default.OutputPath = folderSavePath;
+			folderPath = folderDialog.FolderName;
+			Settings.Default.OutputPath = folderPath;
 			Settings.Default.Save();
 		}
 		else return;
 
-		// Process videos
-		Task processTask = Task.Run(() => VideoProcessor.Process(videoPaths, folderSavePath));
-
-		// Open loading bar
-		LoadingBar loadingBar = new();
-		loadingBar.Owner = this;
-		loadingBar.ShowDialog();
-
-		// Close loading bar
-		await processTask;
-		loadingBar.Close();
-
-		// Load videos
-		LoadVideos(folderSavePath);
+		// Select output folder
+		SelectOutputFolder(folderPath);
 	}
 
-	private async void SelectLastOutputFolder()
+	private void SelectLastOutputFolder()
 	{
 		// Check if input has been loaded
 		if (videoPaths.Length == 0)
@@ -171,17 +159,25 @@ public partial class MainWindow : Window
 		bool hasPath = folderPath.Length > 3;
 		if (!hasPath) return;
 
+		// Select output folder
+		SelectOutputFolder(folderPath);
+	}
+
+	private async void SelectOutputFolder(string folderPath)
+	{
 		// Process videos
 		Task processTask = Task.Run(() => VideoProcessor.Process(videoPaths, folderPath));
 
 		// Open loading bar
 		LoadingBar loadingBar = new();
 		loadingBar.Owner = this;
-		loadingBar.ShowDialog();
+		loadingBar.Show();
+		IsEnabled = false;
 
 		// Close loading bar
 		await processTask;
 		loadingBar.Close();
+		IsEnabled = true;
 
 		// Load videos
 		LoadVideos(folderPath);
