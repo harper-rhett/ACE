@@ -147,7 +147,7 @@ public partial class MainWindow : Window
 		LoadVideos(folderSavePath);
 	}
 
-	private void SelectLastOutputFolder()
+	private async void SelectLastOutputFolder()
 	{
 		// Check if input has been loaded
 		if (videoPaths.Length == 0)
@@ -163,7 +163,16 @@ public partial class MainWindow : Window
 		if (!hasPath) return;
 
 		// Process videos
-		VideoProcessor.Process(videoPaths, folderPath);
+		Task processTask = Task.Run(() => VideoProcessor.Process(videoPaths, folderPath));
+
+		// Open loading bar
+		LoadingBar loadingBar = new();
+		loadingBar.Owner = this;
+		loadingBar.ShowDialog();
+
+		// Close loading bar
+		await processTask;
+		loadingBar.Close();
 
 		// Load videos
 		LoadVideos(folderPath);

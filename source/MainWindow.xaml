@@ -18,12 +18,6 @@
                 <MenuItem x:Name="LoadLastInputVideosItem" Header="Load Last Input Videos" Icon="{StaticResource OpenFolderIcon}"/>
             </MenuItem>
 
-            <!-- Setting Dropdown -->
-            <MenuItem x:Name="SettingsItem" Header="Settings">
-                <MenuItem x:Name="ExampleSetting1" Header="Example Setting 1" IsCheckable="True" Icon="{StaticResource SettingsIcon}"/>
-                <MenuItem x:Name="ExampleSetting2" Header="Example Setting 2" IsCheckable="True" Icon="{StaticResource SettingsIcon}"/>
-            </MenuItem>
-
             <!-- Run Commands -->
             <MenuItem x:Name="RunItem" Header="Run">
                 <MenuItem x:Name="ToNewOutputFolderItem" Header="To New Output Folder" Icon="{StaticResource SaveAsIcon}"/>
