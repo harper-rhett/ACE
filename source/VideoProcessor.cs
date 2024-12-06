@@ -21,11 +21,6 @@ namespace ACE;
 
 static class VideoProcessor
 {
-	//public static async void ProcessAsync(string[] videoPaths, string folderSavePath)
-	//{
-	//	await Task.Run(() => Process(videoPaths, folderSavePath));
-	//}
-
 	public static void Process(string[] videoPaths, string folderSavePath)
 	{
 		// Start a stopwatch to measure time
